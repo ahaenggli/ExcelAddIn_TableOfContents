@@ -95,15 +95,7 @@ namespace ExcelAddIn_TableOfContents
         {
             if (cell.Value2 == null)
                 return "";
-            else return cell.Value2;
-            //if (cell.Value2.GetType().ToString() == "System.Double")
-            //    return ((double)cell.Value2).ToString();
-            //else if (cell.Value2.GetType().ToString() == "System.String")
-            //    return ((string)cell.Value2);
-            //else if (cell.Value2.GetType().ToString() == "System.Boolean")
-            //    return ((bool)cell.Value2).ToString();
-            //else
-            //    return "unknown";
+            else return cell.Value;
         }
 
         private void Application_NewWorkbook(Excel.Workbook Wb)
@@ -197,13 +189,13 @@ End Sub
                 }
 
                 // once a day should be enougth....
-                if (Settings.Default.LastUpdateCheck.AddMinutes(2) <= DateTime.Now)
+                if (Settings.Default.LastUpdateCheck.AddMinutes(60) <= DateTime.Now)
                 {
 
                     string ProgramData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\haenggli.NET\";
                     string AddInData = ProgramData + @"ExcelAddIn_TableOfContents\";
-                    string StartFile = AddInData + @"TableOfContents.vsto";
-                    string localFile = AddInData + @"TableOfContents.zip";
+                    string StartFile = AddInData + @"ExcelAddIn_TableOfContents.vsto";
+                    string localFile = AddInData + @"ExcelAddIn_TableOfContents.zip";
                     string DownloadUrl = Environment.GetEnvironmentVariable("TableOfContents_DownloadUrl", EnvironmentVariableTarget.Machine) ?? Settings.Default.UpdateUrl;
 
                     if (DownloadUrl.Equals("---"))

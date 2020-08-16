@@ -10,8 +10,8 @@ namespace ExcelAddIn_TableOfContent_Installer
     {
         static string ProgramData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\haenggli.NET\";
         static string AddInData = ProgramData + @"ExcelAddIn_TableOfContents\";
-        static string StartFile = AddInData + @"TableOfContents.vsto";
-        static string localFile = AddInData + @"TableOfContents.zip";
+        static string StartFile = AddInData + @"ExcelAddIn_TableOfContents.vsto";
+        static string localFile = AddInData + @"ExcelAddIn_TableOfContents.zip";
 
         static void Main(string[] args)
         {

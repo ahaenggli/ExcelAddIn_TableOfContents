@@ -80,9 +80,9 @@
             this.button3.Name = "button3";
             this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click);
             // 
-            // RibbonMenu
+            // _RibbonBar
             // 
-            this.Name = "RibbonMenu";
+            this.Name = "_RibbonBar";
             this.RibbonType = "Microsoft.Excel.Workbook";
             this.Tabs.Add(this.tab1);
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.Ribbon1_Load);

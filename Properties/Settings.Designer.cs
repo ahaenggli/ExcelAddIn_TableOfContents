@@ -85,7 +85,8 @@ namespace ExcelAddIn_TableOfContents.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://haenggli.net/projects/ExcelAddIn/TableOfContents.zip")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/ahaenggli/ExcelAddIn_TableOfContents/releases/download/latest/" +
+            "ExcelAddIn_TableOfContents.zip")]
         public string UpdateUrl {
             get {
                 return ((string)(this["UpdateUrl"]));

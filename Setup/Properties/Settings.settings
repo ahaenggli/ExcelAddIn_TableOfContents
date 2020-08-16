@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="UpdateUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://haenggli.net/projects/ExcelAddIn/TableOfContents.zip</Value>
+      <Value Profile="(Default)">https://github.com/ahaenggli/ExcelAddIn_TableOfContents/releases/download/latest/ExcelAddIn_TableOfContents.zip</Value>
     </Setting>
   </Settings>
 </SettingsFile>

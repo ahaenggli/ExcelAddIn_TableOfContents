@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelAddIn_TableOfContents", "ExcelAddIn_TableOfContents.csproj", "{4608B8F0-3057-4BE6-9E13-53831CCC8FCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelAddIn_TableOfContents_Installer", "Setup\ExcelAddIn_TableOfContents_Installer.csproj", "{7D0B74A7-F152-4933-912C-5EF7CD7B38DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4608B8F0-3057-4BE6-9E13-53831CCC8FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4608B8F0-3057-4BE6-9E13-53831CCC8FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4608B8F0-3057-4BE6-9E13-53831CCC8FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D0B74A7-F152-4933-912C-5EF7CD7B38DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D0B74A7-F152-4933-912C-5EF7CD7B38DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D0B74A7-F152-4933-912C-5EF7CD7B38DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D0B74A7-F152-4933-912C-5EF7CD7B38DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
