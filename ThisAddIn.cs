@@ -8,6 +8,9 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using System.IO.Compression;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Reflection;
 
 namespace ExcelAddIn_TableOfContents
 {
@@ -23,10 +26,6 @@ namespace ExcelAddIn_TableOfContents
 
             //event and property do have the same name ....
             ((Excel.AppEvents_Event)this.Application).NewWorkbook += Application_NewWorkbook;
-
-            //event for changes in TOC-Sheet
-            this.Application.SheetChange += Application_SheetChange;
-
 
             Thread worker = new Thread(Update);
             worker.IsBackground = true;
@@ -86,12 +85,13 @@ namespace ExcelAddIn_TableOfContents
             string str_arrTblCols = String.Join(";", arrTblCols);
             string str_newCusProp = String.Join(";", newCusProp);
 
+
             PropertyExtension.setProperty(ws, "TocColumns", str_arrTblCols);
             PropertyExtension.setProperty(ws, "TocCustomProperties", str_newCusProp);
 
         }
 
-        public string Selector(Excel.Range cell)
+        private string Selector(Excel.Range cell)
         {
             if (cell.Value2 == null)
                 return "";
@@ -106,8 +106,6 @@ namespace ExcelAddIn_TableOfContents
             PropertyExtension.setProperty(Wb.Sheets[1], "isToc", "0");
         }
 
-
-
         private void Application_WorkbookNewSheet(Excel.Workbook Wb, object Sh)
         {
             if (!(Sh is Excel.Worksheet)) return;
@@ -121,62 +119,17 @@ namespace ExcelAddIn_TableOfContents
             if (!(Sh is Excel.Worksheet)) return;
 
             if (((Excel.Worksheet)Sh).Name.Equals(TocSheetExtension.getTocSheetName()))
+            {
                 TocSheetExtension.generateTocWorksheet();
-
+                //event for changes in TOC-Sheet
+                this.Application.SheetChange += Application_SheetChange;
+            } else this.Application.SheetChange -= Application_SheetChange;
         }
+
         private void ThisAddIn_Shutdown(object sender, EventArgs e)
         {
 
         }
-
-
-        /*
-
-Option Explicit
-
-'event handler for application
-Private TocSheetExtension_AppEventHandler As TocSheetAppEventHandler
-
-' Sub is called whenever AddIn is loaded
-Private Sub Workbook_Open()
- 'To combine keys with    Precede the key code by
- 'SHIFT   + (plus sign)
- 'CTRL    ^ (caret)
- 'ALT     % (percent sign)
-
- '' CTRL + Shift + A
- 'Application.OnKey "^+{A}", "tstBox"
-  Application.OnKey "{F5}", "handleF5Click"
-  isF5 = False
- 'init application wide event handler
-  Set TocSheetExtension_AppEventHandler = New TocSheetAppEventHandler
-
-End Sub
-
-          */
-
-        // handles click on F5-Key
-        private void handleF5Click()
-        {
-
-            Excel.Workbook ActiveWorkbook = Globals.ThisAddIn.Application.ActiveWorkbook;
-
-            if (ActiveWorkbook == null) return;
-
-
-            if (!ActiveWorkbook.ActiveSheet.Name.Equals(TocSheetExtension.getTocSheetName()))
-            {
-                Form frm = new frmPropertyExtension();
-                frm.Show();
-            }
-            else
-                TocSheetExtension.generateTocWorksheet();
-
-
-
-        }
-
-
 
         private void Update()
         {
@@ -188,45 +141,67 @@ End Sub
                     Properties.Settings.Default.Save();
                 }
 
+                Version a = Assembly.GetExecutingAssembly().GetName().Version;
+                Version b = a;
+
                 // once a day should be enougth....
-                if (Settings.Default.LastUpdateCheck.AddMinutes(60) <= DateTime.Now)
+                if (Settings.Default.LastUpdateCheck.AddHours(1) <= DateTime.Now)
                 {
-
-                    string ProgramData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\haenggli.NET\";
-                    string AddInData = ProgramData + @"ExcelAddIn_TableOfContents\";
-                    string StartFile = AddInData + @"ExcelAddIn_TableOfContents.vsto";
-                    string localFile = AddInData + @"ExcelAddIn_TableOfContents.zip";
-                    string DownloadUrl = Environment.GetEnvironmentVariable("TableOfContents_DownloadUrl", EnvironmentVariableTarget.Machine) ?? Settings.Default.UpdateUrl;
-
-                    if (DownloadUrl.Equals("---"))
+                    System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+                    HttpWebRequest wr = (HttpWebRequest )WebRequest.Create(Settings.Default.VersionUrl);
+                    wr.UserAgent = "ahaenggli/ExcelAddIn_TableOfContents";
+                    var x = wr.GetResponse(); ;
+                   
+                    using (var reader = new System.IO.StreamReader(x.GetResponseStream()))
                     {
-                        Settings.Default.LastUpdateCheck = DateTime.Now;
-                        Properties.Settings.Default.Save();
-                        return;
+                        string json = reader.ReadToEnd();
+                        if (json.Contains("tag_name"))
+                        {                           
+                            Regex pattern = new Regex("\"tag_name\":\"v\\d+(\\.\\d+){2,}\",");
+                            Match m = pattern.Match(json);
+                            b = new Version(m.Value.Replace("\"", "").Replace("tag_name:v", "").Replace(",", ""));
+                        }                       
                     }
 
-                    if (!Directory.Exists(AddInData)) Directory.CreateDirectory(AddInData);
-                    foreach (System.IO.FileInfo file in new DirectoryInfo(AddInData).GetFiles()) file.Delete();
-                    foreach (System.IO.DirectoryInfo subDirectory in new DirectoryInfo(AddInData).GetDirectories()) subDirectory.Delete(true);
-
-                    if (DownloadUrl.StartsWith("http"))
+                    if (b > a)
                     {
-                        System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-                        WebClient webClient = new WebClient();
-                        webClient.DownloadFile(DownloadUrl, localFile);
-                        webClient.Dispose();
-                        DownloadUrl = localFile;
+
+                        string ProgramData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\haenggli.NET\";
+                        string AddInData = ProgramData + @"ExcelAddIn_TableOfContents\";
+                        string StartFile = AddInData + @"ExcelAddIn_TableOfContents.vsto";
+                        string localFile = AddInData + @"ExcelAddIn_TableOfContents.zip";
+                        string DownloadUrl = Environment.GetEnvironmentVariable("TableOfContents_DownloadUrl", EnvironmentVariableTarget.Machine) ?? Settings.Default.UpdateUrl;
+
+                        if (DownloadUrl.Equals("---"))
+                        {
+                            Settings.Default.LastUpdateCheck = DateTime.Now;
+                            Properties.Settings.Default.Save();
+                            return;
+                        }
+
+                        if (!Directory.Exists(AddInData)) Directory.CreateDirectory(AddInData);
+                        foreach (System.IO.FileInfo file in new DirectoryInfo(AddInData).GetFiles()) file.Delete();
+                        foreach (System.IO.DirectoryInfo subDirectory in new DirectoryInfo(AddInData).GetDirectories()) subDirectory.Delete(true);
+
+                        if (DownloadUrl.StartsWith("http"))
+                        {
+
+                            WebClient webClient = new WebClient();
+                            webClient.DownloadFile(DownloadUrl, localFile);
+                            webClient.Dispose();
+                            DownloadUrl = localFile;
+                        }
+
+                        ZipFile.ExtractToDirectory(DownloadUrl, AddInData);
                     }
-
-                    ZipFile.ExtractToDirectory(DownloadUrl, AddInData);
-
                     Settings.Default.LastUpdateCheck = DateTime.Now;
                     Properties.Settings.Default.Save();
                 }
             }
             catch (System.Exception Ex)
             {
-                MessageBox.Show(Ex.Message);
+                if(!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("TableOfContents_DownloadUrl", EnvironmentVariableTarget.Machine)))
+                    MessageBox.Show(Ex.Message);
             }
         }
 

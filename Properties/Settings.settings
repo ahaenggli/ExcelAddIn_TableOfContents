@@ -18,10 +18,13 @@
       <Value Profile="(Default)">TableStyleMedium15</Value>
     </Setting>
     <Setting Name="UpdateUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://github.com/ahaenggli/ExcelAddIn_TableOfContents/releases/download/latest/ExcelAddIn_TableOfContents.zip</Value>
+      <Value Profile="(Default)">https://github.com/ahaenggli/ExcelAddIn_TableOfContents/releases/latest/download/ExcelAddIn_TableOfContents.zip</Value>
     </Setting>
     <Setting Name="LastUpdateCheck" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="VersionUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://api.github.com/repos/ahaenggli/ExcelAddIn_TableOfContents/releases/latest</Value>
     </Setting>
   </Settings>
 </SettingsFile>

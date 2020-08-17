@@ -85,7 +85,7 @@ namespace ExcelAddIn_TableOfContents.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/ahaenggli/ExcelAddIn_TableOfContents/releases/download/latest/" +
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/ahaenggli/ExcelAddIn_TableOfContents/releases/latest/download/" +
             "ExcelAddIn_TableOfContents.zip")]
         public string UpdateUrl {
             get {
@@ -101,6 +101,16 @@ namespace ExcelAddIn_TableOfContents.Properties {
             }
             set {
                 this["LastUpdateCheck"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://api.github.com/repos/ahaenggli/ExcelAddIn_TableOfContents/releases/latest" +
+            "")]
+        public string VersionUrl {
+            get {
+                return ((string)(this["VersionUrl"]));
             }
         }
     }

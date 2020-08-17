@@ -15,14 +15,6 @@ namespace ExcelAddIn_TableOfContents
     {
 
 
-        //        'check whether Excel-GUI is german or not
-        public static bool isGermanGUI() {
-            return true;
-            //ToDo: Sprache ermitteln...
-        }
-
-   
-
         //'Does the sheet exists in specific workbook?
         public static bool worksheetExists(Excel.Workbook WB, String sheetToFind ) {
             foreach (Excel.Worksheet Sheet in WB.Worksheets) {

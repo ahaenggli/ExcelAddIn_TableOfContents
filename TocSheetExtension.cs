@@ -152,8 +152,8 @@ namespace ExcelAddIn_TableOfContents
             try
             {
                 if (String.IsNullOrWhiteSpace(prop)) prop = PropertyExtension.getProperty(getTocSheet(), "WorksheetCreatedDatePropName") ?? Settings.Default.WorksheetCreatedDatePropName;
-                if (String.IsNullOrWhiteSpace(prop) && GlobalFunction.isGermanGUI()) prop = "Datum";
-                if (String.IsNullOrWhiteSpace(prop) && !GlobalFunction.isGermanGUI()) prop = "Created";
+                if (String.IsNullOrWhiteSpace(prop)) prop = "Datum";
+                //if (String.IsNullOrWhiteSpace(prop) && !GlobalFunction.isGermanGUI()) prop = "Created";
             }
             catch (System.Exception e)
             {
@@ -173,8 +173,8 @@ namespace ExcelAddIn_TableOfContents
             {
 
                 if (String.IsNullOrWhiteSpace(props)) props = PropertyExtension.getProperty(getTocSheet(), "TocColumns") ?? Settings.Default.TocColumns;
-                if (String.IsNullOrWhiteSpace(props) && GlobalFunction.isGermanGUI()) props = "Blatt;Datum;Beschreibung;Verantwortlich;ToDo;Status;Info";
-                if (String.IsNullOrWhiteSpace(props) && !GlobalFunction.isGermanGUI()) props = "Worksheet;Created;Description;Responsible;ToDo;Status;Info";
+                if (String.IsNullOrWhiteSpace(props)) props = "Blatt;Datum;Beschreibung;Verantwortlich;ToDo;Status;Info";
+                //if (String.IsNullOrWhiteSpace(props) && !GlobalFunction.isGermanGUI()) props = "Worksheet;Created;Description;Responsible;ToDo;Status;Info";
 
             }
             catch (System.Exception e)
@@ -203,8 +203,8 @@ namespace ExcelAddIn_TableOfContents
             {
 
                 if (String.IsNullOrWhiteSpace(props)) props = PropertyExtension.getProperty(getTocSheet(), "TocCustomProperties") ?? Settings.Default.TocCustomProperties;
-                if (String.IsNullOrWhiteSpace(props) && GlobalFunction.isGermanGUI()) props = "Beschreibung;Verantwortlich;ToDo;Status;Info;Datum";
-                if (String.IsNullOrWhiteSpace(props) && !GlobalFunction.isGermanGUI()) props = "Description;Responsible;ToDo;Status;Info;Created";
+                if (String.IsNullOrWhiteSpace(props)) props = "Beschreibung;Verantwortlich;ToDo;Status;Info;Datum";
+                //if (String.IsNullOrWhiteSpace(props) && !GlobalFunction.isGermanGUI()) props = "Description;Responsible;ToDo;Status;Info;Created";
 
             }
             catch (System.Exception e)
@@ -249,8 +249,8 @@ namespace ExcelAddIn_TableOfContents
             }
 
             if (String.IsNullOrWhiteSpace(sumsheet)) sumsheet = Settings.Default.TocWorksheetName;
-            if (String.IsNullOrWhiteSpace(sumsheet) && GlobalFunction.isGermanGUI()) sumsheet = "Uebersicht";
-            if (String.IsNullOrWhiteSpace(sumsheet) && !GlobalFunction.isGermanGUI()) sumsheet = "Toc";
+            if (String.IsNullOrWhiteSpace(sumsheet)) sumsheet = "Uebersicht";
+            //if (String.IsNullOrWhiteSpace(sumsheet) && !GlobalFunction.isGermanGUI()) sumsheet = "Toc";
 
             return sumsheet;
         }
