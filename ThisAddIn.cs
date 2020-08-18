@@ -11,6 +11,7 @@ using System.IO.Compression;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Reflection;
+using System.Deployment.Application;
 
 namespace ExcelAddIn_TableOfContents
 {
@@ -141,8 +142,9 @@ namespace ExcelAddIn_TableOfContents
                     Properties.Settings.Default.Save();
                 }
 
-                Version a = Assembly.GetExecutingAssembly().GetName().Version;
+                Version a = (ApplicationDeployment.IsNetworkDeployed)? ApplicationDeployment.CurrentDeployment.CurrentVersion : Assembly.GetExecutingAssembly().GetName().Version;
                 Version b = a;
+           
 
                 // once a day should be enougth....
                 if (Settings.Default.LastUpdateCheck.AddHours(1) <= DateTime.Now)
@@ -162,7 +164,7 @@ namespace ExcelAddIn_TableOfContents
                             b = new Version(m.Value.Replace("\"", "").Replace("tag_name:v", "").Replace(",", ""));
                         }                       
                     }
-
+                    
                     if (b > a)
                     {
 
