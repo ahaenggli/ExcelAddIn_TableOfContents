@@ -1,4 +1,4 @@
-﻿using ExcelAddIn_TableOfContent_Installer.Properties;
+﻿using ExcelAddIn_TableOfContents_Installer.Properties;
 using System;
 using System.IO;
 using System.IO.Compression;
@@ -10,7 +10,7 @@ namespace ExcelAddIn_TableOfContent_Installer
     {
         static string ProgramData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\haenggli.NET\";
         static string AddInData = ProgramData + @"ExcelAddIn_TableOfContents\";
-        static string StartFile = AddInData + @"ExcelAddIn_TableOfContents.vsto";
+        static string StartFile = AddInData + @"setup.exe";
         static string localFile = AddInData + @"ExcelAddIn_TableOfContents.zip";
 
         static void Main(string[] args)

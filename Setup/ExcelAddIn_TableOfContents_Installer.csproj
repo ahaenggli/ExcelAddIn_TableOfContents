@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7D0B74A7-F152-4933-912C-5EF7CD7B38DE}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ExcelAddIn_TableOfContent_Installer</RootNamespace>
-    <AssemblyName>ExcelAddIn_TableOfContent_Installer</AssemblyName>
+    <RootNamespace>ExcelAddIn_TableOfContents_Installer</RootNamespace>
+    <AssemblyName>ExcelAddIn_TableOfContents_Installer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -60,4 +60,9 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>del "$(ProjectDir)$(OutDir)\$(TargetName).zip"
+powershell "Compress-Archive -Path $(ProjectDir)$(OutDir)\*.exe -DestinationPath $(ProjectDir)$(OutDir)\$(TargetName).zip"
+copy "$(ProjectDir)$(OutDir)\$(TargetName).zip" \\asyn\web\PlugIn\excel\</PostBuildEvent>
+  </PropertyGroup>
 </Project>

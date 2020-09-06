@@ -33,7 +33,7 @@
     <PublishUrl>\\asyn\web\PlugIn\Excel\</PublishUrl>
     <InstallUrl />
     <TargetCulture>de</TargetCulture>
-    <ApplicationVersion>1.1.0.7</ApplicationVersion>
+    <ApplicationVersion>1.1.0.10</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
