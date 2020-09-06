@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelAddIn_TableOfContents", "ExcelAddIn_TableOfContents.csproj", "{4608B8F0-3057-4BE6-9E13-53831CCC8FCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelAddIn_TableOfContents", "AddIn\ExcelAddIn_TableOfContents.csproj", "{4608B8F0-3057-4BE6-9E13-53831CCC8FCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelAddIn_TableOfContents_Installer", "Setup\ExcelAddIn_TableOfContents_Installer.csproj", "{7D0B74A7-F152-4933-912C-5EF7CD7B38DE}"
 EndProject

@@ -74,7 +74,7 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // PropertyExtensionForm
+            // frmPropertyExtension
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -84,7 +84,11 @@
             this.Controls.Add(this.txtValue);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "PropertyExtensionForm";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmPropertyExtension";
+            this.ShowIcon = false;
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.PropertyExtensionForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -33,7 +33,7 @@
     <PublishUrl>\\asyn\web\PlugIn\Excel\</PublishUrl>
     <InstallUrl />
     <TargetCulture>de</TargetCulture>
-    <ApplicationVersion>1.1.0.1</ApplicationVersion>
+    <ApplicationVersion>1.1.0.7</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -182,6 +182,12 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PropertyExtension.cs" />
     <Compile Include="GlobalFunction.cs" />
     <Compile Include="frmPropertyExtension.cs">
@@ -189,6 +195,9 @@
     </Compile>
     <Compile Include="frmPropertyExtension.Designer.cs">
       <DependentUpon>frmPropertyExtension.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon.cs">
+      <XmlRibbon>true</XmlRibbon>
     </Compile>
     <Compile Include="TocSheetExtension.cs" />
     <Compile Include="frmTocSheetExtension.cs">
@@ -200,6 +209,9 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -211,9 +223,6 @@
     </Compile>
     <EmbeddedResource Include="frmPropertyExtension.resx">
       <DependentUpon>frmPropertyExtension.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="_RibbonBar.resx">
-      <DependentUpon>_RibbonBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTocSheetExtension.resx">
       <DependentUpon>frmTocSheetExtension.cs</DependentUpon>
@@ -229,12 +238,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="_RibbonBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="_RibbonBar.Designer.cs">
-      <DependentUpon>_RibbonBar.cs</DependentUpon>
-    </Compile>
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -245,6 +248,9 @@
       <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
     </Compile>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ribbon.xml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -257,7 +263,7 @@
     <ManifestKeyFile>ExcelAddIn_TableOfContents_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>9D887E3994002C2F034089D15DA455106C3DC21D</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>2CAA1DDD8B6B75CBD461F41F03718DC9F366E5CF</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,23 +1,25 @@
-﻿using System;
-using System.Linq;
-using Excel = Microsoft.Office.Interop.Excel;
-using System.Windows.Forms;
+﻿using ExcelAddIn_TableOfContents.Properties;
 using Microsoft.Office.Interop.Excel;
-using ExcelAddIn_TableOfContents.Properties;
-using System.IO;
-using System.Net;
-using System.Threading;
-using System.IO.Compression;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Reflection;
+using System;
 using System.Deployment.Application;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ExcelAddIn_TableOfContents
 {
     public partial class ThisAddIn
     {
-
+        protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
+        {
+            return new Ribbon();
+        }
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -124,7 +126,8 @@ namespace ExcelAddIn_TableOfContents
                 TocSheetExtension.generateTocWorksheet();
                 //event for changes in TOC-Sheet
                 this.Application.SheetChange += Application_SheetChange;
-            } else this.Application.SheetChange -= Application_SheetChange;
+            }
+            else this.Application.SheetChange -= Application_SheetChange;
         }
 
         private void ThisAddIn_Shutdown(object sender, EventArgs e)
@@ -136,35 +139,47 @@ namespace ExcelAddIn_TableOfContents
         {
             try
             {
+
+                if (Settings.Default.IsUpgradeRequired)
+                {
+                    Settings.Default.Upgrade();
+                    Settings.Default.Reload();
+                    Settings.Default.IsUpgradeRequired = false;
+                    Settings.Default.Save();
+                }
+
+                // AutoUpdate disabled
+                if (!Settings.Default.IsAutoUpdate) return;
+
                 if (Settings.Default.LastUpdateCheck == null)
                 {
                     Settings.Default.LastUpdateCheck = DateTime.Now;
                     Properties.Settings.Default.Save();
                 }
 
-                Version a = (ApplicationDeployment.IsNetworkDeployed)? ApplicationDeployment.CurrentDeployment.CurrentVersion : Assembly.GetExecutingAssembly().GetName().Version;
+                Version a = (ApplicationDeployment.IsNetworkDeployed) ? ApplicationDeployment.CurrentDeployment.CurrentVersion : Assembly.GetExecutingAssembly().GetName().Version;
                 Version b = a;
-           
+
 
                 // once a day should be enougth....
                 if (Settings.Default.LastUpdateCheck.AddHours(1) <= DateTime.Now)
                 {
                     System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-                    HttpWebRequest wr = (HttpWebRequest )WebRequest.Create(Settings.Default.VersionUrl);
+                    HttpWebRequest wr = (HttpWebRequest)WebRequest.Create(Settings.Default.VersionUrl);
                     wr.UserAgent = "ahaenggli/ExcelAddIn_TableOfContents";
                     var x = wr.GetResponse(); ;
-                   
+
                     using (var reader = new System.IO.StreamReader(x.GetResponseStream()))
                     {
                         string json = reader.ReadToEnd();
                         if (json.Contains("tag_name"))
-                        {                           
+                        {
                             Regex pattern = new Regex("\"tag_name\":\"v\\d+(\\.\\d+){2,}\",");
                             Match m = pattern.Match(json);
                             b = new Version(m.Value.Replace("\"", "").Replace("tag_name:v", "").Replace(",", ""));
-                        }                       
+                        }
                     }
-                    
+
                     if (b > a)
                     {
 
@@ -172,7 +187,7 @@ namespace ExcelAddIn_TableOfContents
                         string AddInData = ProgramData + @"ExcelAddIn_TableOfContents\";
                         string StartFile = AddInData + @"ExcelAddIn_TableOfContents.vsto";
                         string localFile = AddInData + @"ExcelAddIn_TableOfContents.zip";
-                        string DownloadUrl = Environment.GetEnvironmentVariable("TableOfContents_DownloadUrl", EnvironmentVariableTarget.Machine) ?? Settings.Default.UpdateUrl;
+                        string DownloadUrl = Settings.Default.UpdateUrl;
 
                         if (DownloadUrl.Equals("---"))
                         {
@@ -202,7 +217,7 @@ namespace ExcelAddIn_TableOfContents
             }
             catch (System.Exception Ex)
             {
-                if(!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("TableOfContents_DownloadUrl", EnvironmentVariableTarget.Machine)))
+                if (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("TableOfContents_DEBUG", EnvironmentVariableTarget.Machine)))
                     MessageBox.Show(Ex.Message);
             }
         }

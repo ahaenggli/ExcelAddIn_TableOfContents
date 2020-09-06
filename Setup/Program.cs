@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ExcelAddIn_TableOfContent_Installer.Properties;
+using System;
+using System.IO;
 using System.IO.Compression;
 using System.Net;
-using System.IO;
-using ExcelAddIn_TableOfContent_Installer.Properties;
 
 namespace ExcelAddIn_TableOfContent_Installer
 {
@@ -15,19 +15,19 @@ namespace ExcelAddIn_TableOfContent_Installer
 
         static void Main(string[] args)
         {
-            string DownloadUrl = Environment.GetEnvironmentVariable("TableOfContents_DownloadUrl", EnvironmentVariableTarget.Machine) ?? Settings.Default.UpdateUrl;
+            string DownloadUrl = Settings.Default.UpdateUrl;
 
-            bool runVSTO = true;
+            //bool runVSTO = true;
 
-            if (args.Length > 0)
-            {
-                DownloadUrl = args[0];
+            //if (args.Length > 0)
+            //{
+            //    DownloadUrl = args[0];
 
-                foreach (string a in args)
-                {
-                    if (a.ToLower().Equals("/silent")) runVSTO = false;
-                }
-            }
+            //    foreach (string a in args)
+            //    {
+            //        if (a.ToLower().Equals("/silent")) runVSTO = false;
+            //    }
+            //}
 
             if (!Directory.Exists(AddInData)) Directory.CreateDirectory(AddInData);
             foreach (System.IO.FileInfo file in new DirectoryInfo(AddInData).GetFiles()) file.Delete();
@@ -43,7 +43,8 @@ namespace ExcelAddIn_TableOfContent_Installer
 
             ZipFile.ExtractToDirectory(DownloadUrl, AddInData);
             //System.Diagnostics.Process.Start("VSTOInstaller.exe /silent /uninstall \""+ StartFile + "\"");
-            if (runVSTO) System.Diagnostics.Process.Start(StartFile);
+            //if (runVSTO) 
+            System.Diagnostics.Process.Start(StartFile);
 
         }
     }

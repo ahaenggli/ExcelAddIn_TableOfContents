@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI onLoad="Ribbon_Load" xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+    <ribbon>
+        <tabs>
+            <tab idMso="TabAddIns" keytip="T">
+                <group id="group1" label="Inhaltsverzeichnis">
+                    <button id="button2" onAction="OnGenerieren" keytip="G" label="Generieren"    showImage="true" imageMso="GroupTableOfContents" size="large"  />
+
+                  <buttonGroup id="btnGrpOben">
+                    <button id="btnWertChange" onAction="OnWertChange" keytip="W" label="Werte ändern"  showLabel="false" showImage="true" imageMso="TableOfContentsUpdate" />
+                  </buttonGroup>
+                  
+                  <buttonGroup id="btnGrpMitte">
+                    <button id="btnSettings"   onAction="OnSettings"   keytip="E" label="Einstellungen" showLabel="false" showImage="true" imageMso="ControlToolboxOutlook" />
+                  </buttonGroup>
+                  
+                  <buttonGroup id="btnGrpUnten">
+                    <button id="btnInfo"       onAction="OnInfo"       keytip="I" label="Info" showLabel="false" showImage="true" imageMso="Info" />
+                  </buttonGroup>
+
+                </group>
+            </tab>
+        </tabs>
+    </ribbon>
+</customUI>

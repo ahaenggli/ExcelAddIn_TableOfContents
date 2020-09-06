@@ -144,7 +144,7 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Style Übersichtsblatt";
             // 
-            // TocSheetExtensionForm
+            // frmTocSheetExtension
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -161,8 +161,12 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "TocSheetExtensionForm";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmTocSheetExtension";
+            this.ShowIcon = false;
             this.Text = "edit custom values for index sheet";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.TocSheetExtensionForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

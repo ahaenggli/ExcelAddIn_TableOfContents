@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using Excel = Microsoft.Office.Interop.Excel;
-using Office = Microsoft.Office.Core;
-using Microsoft.Office.Tools.Excel;
-using System.Windows.Forms;
+﻿using ExcelAddIn_TableOfContents.Properties;
 using Microsoft.Office.Interop.Excel;
-using ExcelAddIn_TableOfContents.Properties;
+using System;
+using System.Linq;
+using Excel = Microsoft.Office.Interop.Excel;
 
 
 namespace ExcelAddIn_TableOfContents
@@ -276,5 +270,5 @@ namespace ExcelAddIn_TableOfContents
     }
 
 
-    
+
 }
