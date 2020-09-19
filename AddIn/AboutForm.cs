@@ -1,5 +1,6 @@
 ﻿using ExcelAddIn_TableOfContents.Properties;
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -114,5 +115,23 @@ namespace ExcelAddIn_TableOfContents
         }
         #endregion
 
+        private void lnkGitHub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ProcessStartInfo website = new ProcessStartInfo(@"https://github.com/ahaenggli/ExcelAddIn_TableOfContents");
+            Process.Start(website);
+        }
+
+        private void linkLizenz_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            ProcessStartInfo website = new ProcessStartInfo(@"https://github.com/ahaenggli/ExcelAddIn_TableOfContents/blob/master/LICENSE");
+            Process.Start(website);
+        }
+
+        private void linkSpenden_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ProcessStartInfo website = new ProcessStartInfo(@"https://github.com/ahaenggli/ExcelAddIn_TableOfContents");
+            Process.Start(website);
+        }
     }
 }

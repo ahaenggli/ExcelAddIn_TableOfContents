@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 [assembly: AssemblyTitle("ExcelAddIn_TableOfContents")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Excel AddIn")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ExcelAddIn_TableOfContents")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCompany("haenggli.NET")]
+[assembly: AssemblyProduct("Excel AddIn - TableOfContents")]
+[assembly: AssemblyCopyright("Copyright © 2020 Adriano Hänggli")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,6 +31,6 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.0.9")]
-[assembly: AssemblyFileVersion("1.1.0.9")]
+[assembly: AssemblyVersion("1.1.0.10")]
+[assembly: AssemblyFileVersion("1.1.0.10")]
 

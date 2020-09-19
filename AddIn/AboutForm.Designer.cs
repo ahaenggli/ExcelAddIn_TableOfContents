@@ -36,8 +36,8 @@
             this.txtVersion = new System.Windows.Forms.TextBox();
             this.btnReset = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lnkSpenden = new System.Windows.Forms.LinkLabel();
+            this.lnkLizenz = new System.Windows.Forms.LinkLabel();
             this.lnkGitHub = new System.Windows.Forms.LinkLabel();
             this.lblProdukt = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -125,8 +125,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.linkLabel2);
-            this.groupBox2.Controls.Add(this.linkLabel1);
+            this.groupBox2.Controls.Add(this.lnkSpenden);
+            this.groupBox2.Controls.Add(this.lnkLizenz);
             this.groupBox2.Controls.Add(this.lnkGitHub);
             this.groupBox2.Controls.Add(this.lblProdukt);
             this.groupBox2.Controls.Add(this.label5);
@@ -143,27 +143,29 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Infos";
             // 
-            // linkLabel2
+            // lnkSpenden
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel2.Location = new System.Drawing.Point(162, 77);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(50, 13);
-            this.linkLabel2.TabIndex = 9;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Spenden";
+            this.lnkSpenden.AutoSize = true;
+            this.lnkSpenden.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkSpenden.Location = new System.Drawing.Point(162, 77);
+            this.lnkSpenden.Name = "lnkSpenden";
+            this.lnkSpenden.Size = new System.Drawing.Size(50, 13);
+            this.lnkSpenden.TabIndex = 9;
+            this.lnkSpenden.TabStop = true;
+            this.lnkSpenden.Text = "Spenden";
+            this.lnkSpenden.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkSpenden_LinkClicked);
             // 
-            // linkLabel1
+            // lnkLizenz
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(68, 77);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(65, 13);
-            this.linkLabel1.TabIndex = 8;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Lizenz (MIT)";
+            this.lnkLizenz.AutoSize = true;
+            this.lnkLizenz.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkLizenz.Location = new System.Drawing.Point(68, 77);
+            this.lnkLizenz.Name = "lnkLizenz";
+            this.lnkLizenz.Size = new System.Drawing.Size(65, 13);
+            this.lnkLizenz.TabIndex = 8;
+            this.lnkLizenz.TabStop = true;
+            this.lnkLizenz.Text = "Lizenz (MIT)";
+            this.lnkLizenz.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLizenz_LinkClicked);
             // 
             // lnkGitHub
             // 
@@ -175,6 +177,7 @@
             this.lnkGitHub.TabIndex = 7;
             this.lnkGitHub.TabStop = true;
             this.lnkGitHub.Text = "GitHub";
+            this.lnkGitHub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkGitHub_LinkClicked);
             // 
             // lblProdukt
             // 
@@ -251,8 +254,8 @@
         private System.Windows.Forms.TextBox txtVersion;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel lnkSpenden;
+        private System.Windows.Forms.LinkLabel lnkLizenz;
         private System.Windows.Forms.LinkLabel lnkGitHub;
         private System.Windows.Forms.Label lblProdukt;
         private System.Windows.Forms.Label label5;
